@@ -27,7 +27,7 @@ namespace HelloWorld
 
         public void RegisterWithCarEngine(CarEngineHandler methodToCall)
         {
-            listOfhandlers = methodToCall;
+            listOfhandlers += methodToCall;
         }
 
         public void Accelerate(int delta)

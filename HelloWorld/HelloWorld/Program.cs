@@ -28,7 +28,8 @@ namespace HelloWorld
                 c.Accelerate(20);
             }
 
-
+            Form mainForm = new MainForm();
+            mainForm.Show();
             Console.ReadLine();
             MessageBox.Show("Application End");
         }
