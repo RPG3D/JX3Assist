@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static System.Console;
+using static System.DateTime;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 
@@ -16,28 +18,16 @@ namespace HelloWorld
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.WriteLine("Hello World From C Sharp!");
             Console.WriteLine("The Main() has {0} parameters.", args.Length);
+            Console.WriteLine(Now.Date);
 
-            DatabaseReader dr = new DatabaseReader();
-            int? i = dr.GetIntFromDatabase();
-            if(i.HasValue)
+            Car c = new Car("Yu", 100, 10);
+            c.RegisterWithCarEngine(new Car.CarEngineHandler(c.OnCarEngineEvent));
+            Console.WriteLine("Speed Up");
+            for(int i = 0; i < 6; ++i)
             {
-                Console.WriteLine("Value of i is {0}", i.Value);
-            }
-            else
-            {
-                Console.WriteLine("Value of i is undefined");
-         
+                c.Accelerate(20);
             }
 
-            bool? b = dr.GetBoolFromDatabase();
-            if(b!= null)
-            {
-                Console.WriteLine("value of b is {0}", b.Value);
-            }
-            else
-            {
-                Console.WriteLine("Value of b is undefined");
-            }
 
             Console.ReadLine();
             MessageBox.Show("Application End");

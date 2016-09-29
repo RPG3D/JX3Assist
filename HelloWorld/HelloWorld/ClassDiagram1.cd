@@ -9,8 +9,15 @@
   </Class>
   <Class Name="HelloWorld.Car">
     <Position X="3" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="HelloWorld.Car.CarEngineHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Car.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAIAAAAAAAQBAAAAIAIACAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Car.cs</FileName>
     </TypeIdentifier>
   </Class>
