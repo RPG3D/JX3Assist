@@ -7,5 +7,11 @@ namespace HelloWorld
 {
     public class SportsCar : Car
     {
+        public string GetPetName()
+        {
+            //throw new System.NotImplementedException();
+            petName = "SportCar";
+            return petName;
+        }
     }
 }

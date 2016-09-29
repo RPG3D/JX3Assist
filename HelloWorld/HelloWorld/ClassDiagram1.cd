@@ -10,15 +10,22 @@
   <Class Name="HelloWorld.Car">
     <Position X="3" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Car.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="HelloWorld.SportsCar" Collapsed="true">
+  <Class Name="HelloWorld.SportsCar">
     <Position X="5.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SpotsCar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HelloWorld.DatabaseReader">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAA=</HashCode>
+      <FileName>DatabaseReader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="微软雅黑" Size="9" />

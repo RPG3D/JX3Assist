@@ -7,6 +7,6 @@ namespace HelloWorld
 {
     public class Car
     {
-        public string petname;
+        public string petName;
     }
 }
