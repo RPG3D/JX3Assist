@@ -8,9 +8,17 @@ using System.Windows;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Media;
+using System.IO;
 
 namespace JxqyWpf
 {
+    public class AppConfig
+    {
+        public int HotKey { get; set; }
+
+        public int MacroKey { get; set; }
+    }
+
     public class MyApp
     {
         private Input inputObj = new Input();
@@ -18,6 +26,8 @@ namespace JxqyWpf
         private bool bShouldTick = false;
         private Object thisLock = new Object();
         private Thread fun;
+
+        AppConfig config = new AppConfig();
 
         [DllImport("Kernel32")]
         public static extern void AllocConsole();
@@ -135,6 +145,14 @@ namespace JxqyWpf
                 }
                 InterceptionDriver.Send(ctx, device, ref strk, 1);
             }
+        }
+
+        public void ReadConfig(string fileName)
+        {
+            FileStream file = new FileStream(fileName, FileMode.Open);
+
+            file.Seek(0, SeekOrigin.Begin);
+            
         }
     }
 }
