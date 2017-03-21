@@ -153,6 +153,7 @@ namespace JxqyWpf
 
             file.Seek(0, SeekOrigin.Begin);
             
+            
         }
     }
 }
