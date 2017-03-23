@@ -14,9 +14,42 @@ namespace JxqyWpf
 {
     public class AppConfig
     {
-        public int HotKey { get; set; }
+        public AppConfig(string inFileName)
+        {
+            configFileName = inFileName;
+        }
 
-        public int MacroKey { get; set; }
+        public string ReadPowerKey()
+        {
+            ConfigFile cfg = new ConfigFile(configFileName);
+            return cfg.ReadValue("Key", "PowerKey");
+        }
+
+        public void SetPowerKey(string key)
+        {
+            ConfigFile cfg = new ConfigFile(configFileName);
+            cfg.WriteValue("Key", "PowerKey", key);
+        }
+
+        public string ReadMacroKey()
+        {
+            ConfigFile cfg = new ConfigFile(configFileName);
+            return cfg.ReadValue("Key", "MacroKey");
+        }
+
+        public void SetMacroKey(string key)
+        {
+            ConfigFile cfg = new ConfigFile(configFileName);
+            cfg.WriteValue("Key", "MacroKey", key);
+        }
+
+        public string ReadWindowTitle()
+        {
+            ConfigFile cfg = new ConfigFile(configFileName);
+            return cfg.ReadValue("Key", "WindowTitle");
+        }
+
+        private string configFileName;
     }
 
     public class MyApp
@@ -25,9 +58,13 @@ namespace JxqyWpf
         private int tickTime = 50;
         private bool bShouldTick = false;
         private Object thisLock = new Object();
+        private int powerKey = 41;
+        private int macroKey = 66;
         private Thread fun;
+        public string windowTitle = "Jx3Assist";
 
-        AppConfig config = new AppConfig();
+        
+        AppConfig config = new AppConfig(Directory.GetCurrentDirectory() + "/AppConfig.ini");
 
         [DllImport("Kernel32")]
         public static extern void AllocConsole();
@@ -36,28 +73,59 @@ namespace JxqyWpf
 
         public MyApp()
         {
-            inputObj.KeyboardFilterMode = KeyboardFilterMode.All;
-            inputObj.Load();
-
-            fun = new Thread(new ThreadStart(WaitForCmd));
-            fun.Start();
-
 #if DEBUG
 
             AllocConsole();
 #endif
+            inputObj.KeyboardFilterMode = KeyboardFilterMode.All;
+            inputObj.Load();
+            ConfigApp();
+
+            fun = new Thread(new ThreadStart(WaitForCmd));
+            fun.Start();
+
             Tick();
         }
-        
+
+        private void ConfigApp()
+        {
+            ///读取开始、停止按钮
+            string pStr = config.ReadPowerKey();
+            int pKey = 0;
+            if (int.TryParse(pStr, out pKey))
+            {
+                SetPowerKey(pKey);
+#if DEBUG
+                Console.WriteLine("SetPowerKey" + pKey);
+#endif
+                
+            }
+
+            ///读取宏按钮
+            string mStr = config.ReadMacroKey();
+            int mKey = 0;
+            if (int.TryParse(mStr, out mKey))
+            {
+                SetMacroKey(mKey);
+#if DEBUG
+                Console.WriteLine("SetMacroKey" + mKey);
+#endif
+                
+            }
+
+            ///读取窗口标题
+            windowTitle = config.ReadWindowTitle();
+        }
+
         public async void Tick()
         {
             while(true)
             {
                 if(bShouldTick)
                 {
-                    inputObj.SendKey(Keys.F8, KeyState.Down);
+                    inputObj.SendKey((Keys)macroKey, KeyState.Down);
                     await Task.Delay(5);
-                    inputObj.SendKey(Keys.F8, KeyState.Up);
+                    inputObj.SendKey((Keys)macroKey, KeyState.Up);
                     await Task.Delay(tickTime - 5);
                 } 
                 else
@@ -78,9 +146,15 @@ namespace JxqyWpf
             return tickTime;
         }
 
-        public int SetKey(int inKey)
+        public int SetPowerKey(int inKey)
         {
-            //key = inKey;
+            powerKey = inKey;
+            return inKey;
+        }
+
+        public int SetMacroKey(int inKey)
+        {
+            macroKey = inKey;
             return inKey;
         }
 
@@ -115,7 +189,7 @@ namespace JxqyWpf
 #if DEBUG
                 Console.WriteLine((int)strk.Key.Code);
 #endif
-                if (strk.Key.Code == Keys.Tilde)
+                if (strk.Key.Code == (Keys)powerKey)
                 {
                     ++i;
                     if(i < 2)

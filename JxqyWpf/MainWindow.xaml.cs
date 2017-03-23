@@ -29,6 +29,7 @@ namespace JxqyWpf
         public MainWindow()
         {
             InitializeComponent();
+            this.Title = app.windowTitle;
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace AutoUpdate
+namespace JxqyWpf
 {
     public class ConfigFile
     {
