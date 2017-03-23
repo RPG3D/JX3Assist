@@ -82,8 +82,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Input.cs" />
+    <Compile Include="Interception\InterceptionDriver.cs" />
+    <Compile Include="Interception\KeyPressedEventArgs.cs" />
+    <Compile Include="Interception\Keys.cs" />
+    <Compile Include="Interception\MousePressedEventArgs.cs" />
     <Compile Include="MyApp.cs" />
-    <Compile Include="ScrollDirection.cs" />
+    <Compile Include="Interception\ScrollDirection.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,17 +97,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Input.cs" />
-    <Compile Include="InterceptionDriver.cs" />
-    <Compile Include="KeyPressedEventArgs.cs" />
-    <Compile Include="Keys.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MousePressedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -131,10 +131,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="gameupdater_00001.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="JX3Client_00001.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
