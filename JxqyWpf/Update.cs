@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 using System.ComponentModel;
+using System.Windows;
 
 namespace JxqyWpf
 {
@@ -17,6 +18,9 @@ namespace JxqyWpf
         protected string serverVersion;
         protected string tmpFileName = "tmp";
         protected string serverConfigFileUrl;
+        protected string patchFileName = "Patch.tmp";
+
+        protected UpdateWindow updWin = new UpdateWindow();
 
         public Update()
         {
@@ -46,8 +50,29 @@ namespace JxqyWpf
             ConfigFile serverCfg = new ConfigFile(workPath + "/" + tmpFileName);
             if (localVersion == serverVersion)
             {
+                MessageBox.Show("Your App is the latest version");
                 return;
             }
+
+            WebClient dlClient = new WebClient();
+
+            string patchUrl = serverCfg.ReadValue("PatchName", "Url");
+            dlClient.DownloadFileCompleted += new AsyncCompletedEventHandler(OnDownloadEnd);
+            dlClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(OnDownloadChanged);
+            dlClient.DownloadFileAsync(new Uri(patchUrl), patchFileName);
+
+            updWin.Show();
+        }
+
+        public void OnDownloadChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            updWin.ChangePrograss(e.ProgressPercentage);
+        }
+
+        public void OnDownloadEnd(object sender, AsyncCompletedEventArgs e)
+        {
+            updWin.Close();
+            MessageBox.Show("Your App is the latest version");
         }
     }
 }
