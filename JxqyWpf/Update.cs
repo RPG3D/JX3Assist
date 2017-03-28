@@ -8,6 +8,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Windows;
 
+
 namespace JxqyWpf
 {
     public class Update
@@ -72,7 +73,17 @@ namespace JxqyWpf
         public void OnDownloadEnd(object sender, AsyncCompletedEventArgs e)
         {
             updWin.Close();
+            UpdateSelf(patchFileName);
             MessageBox.Show("Your App is the latest version");
+        }
+
+        public bool UpdateSelf(string newFileName)
+        {
+            string selfName = Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            File.Move(selfName, selfName + "_old");
+            File.Move(patchFileName, selfName);
+            File.Delete(selfName + "_old");
+            return true;
         }
     }
 }
