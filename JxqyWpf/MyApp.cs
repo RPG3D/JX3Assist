@@ -63,8 +63,6 @@ namespace JxqyWpf
         private Thread fun;
         public string windowTitle = "Jx3Assist";
 
-        
-        AppConfig config = new AppConfig(Directory.GetCurrentDirectory() + "/AppConfig.ini");
 
         [DllImport("Kernel32")]
         public static extern void AllocConsole();
@@ -89,6 +87,8 @@ namespace JxqyWpf
 
         private void ConfigApp()
         {
+            AppConfig config = new AppConfig(Directory.GetCurrentDirectory() + "/AppConfig.ini");
+
             ///读取开始、停止按钮
             string pStr = config.ReadPowerKey();
             int pKey = 0;

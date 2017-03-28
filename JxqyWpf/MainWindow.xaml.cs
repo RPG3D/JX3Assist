@@ -69,5 +69,10 @@ namespace JxqyWpf
             System.Environment.Exit(0);
             base.OnClosed(e);
         }
+
+        private void btnCheckUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
