@@ -7,7 +7,8 @@ using System.Net;
 using System.IO;
 using System.ComponentModel;
 using System.Windows;
-
+using System.Windows.Automation;
+using System.Diagnostics;
 
 namespace JxqyWpf
 {
@@ -20,7 +21,7 @@ namespace JxqyWpf
         protected string tmpFileName = "tmp";
         protected string serverConfigFileUrl;
         protected string patchFileName = "Patch.tmp";
-        static protected bool isChecking = false;
+        protected bool isChecking = false;
 
         protected UpdateWindow updWin = new UpdateWindow();
 
@@ -28,6 +29,11 @@ namespace JxqyWpf
         {
             ConfigFile updateCfg = new ConfigFile(workPath + "/" + updateConfigName);
             serverConfigFileUrl = updateCfg.ReadValue("ServerInfo", "ConfigFileUrl");
+
+            if (File.Exists("old_"))
+            {
+                File.Delete("old_");
+            }
         }
 
         public void CheckUpdate()
@@ -36,7 +42,9 @@ namespace JxqyWpf
             {
                 return;
             }
+
             isChecking = true;
+
 
             ConfigFile updateCfg = new ConfigFile(workPath + "/" + updateConfigName);
             localVersion = updateCfg.ReadValue("AppInfo", "AppVersion");
@@ -54,12 +62,11 @@ namespace JxqyWpf
             serverVersion = serverCfg.ReadValue("AppInfo", "AppVersion");
             if (localVersion == serverVersion)
             {
-                if(File.Exists(tmpFileName))
+                isChecking = false;
+                if (File.Exists(tmpFileName))
                 {
                     File.Delete(tmpFileName);
                 }
-
-                isChecking = false;
                 MessageBox.Show("Your App is the latest version");
                 return;
             }
@@ -69,7 +76,17 @@ namespace JxqyWpf
             string patchUrl = serverCfg.ReadValue("PatchName", "Url");
             dlClient.DownloadFileCompleted += new AsyncCompletedEventHandler(OnDownloadEnd);
             dlClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(OnDownloadChanged);
+
+            if (File.Exists(patchFileName))
+            {
+                File.Delete(patchFileName);
+            }
             dlClient.DownloadFileAsync(new Uri(patchUrl), patchFileName);
+
+            if (File.Exists(tmpFileName))
+            {
+                File.Delete(tmpFileName);
+            }
 
             updWin.Show();
         }
@@ -86,25 +103,34 @@ namespace JxqyWpf
             
         }
 
-        public bool UpdateSelf(string newFileName)
+        public void UpdateSelf(string newFileName)
         {
             string selfName = Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
 
-            if (File.Exists(selfName + "_old"))
+            if (File.Exists("old_"))
             {
-                File.Delete(selfName + "_old");
-            }
-            
-            File.Move(selfName, selfName + "_old");
-            File.Move(patchFileName, selfName);
-            if (File.Exists(selfName + "_old"))
-            {
-                //File.Delete(selfName + "_old");
+                File.Delete("old_");
             }
 
-            MessageBox.Show("Your App is the latest version");
+            File.Move(selfName, "old_");
+            File.Copy(patchFileName, selfName);
 
-            return true;
+            ConfigFile updateCfg = new ConfigFile(workPath + "/" + updateConfigName);
+            updateCfg.WriteValue("AppInfo", "AppVersion", serverVersion);
+            MessageBox.Show("Updating sucessful.The App is restarting.");
+
+            if (File.Exists(tmpFileName))
+            {
+                File.Delete(tmpFileName);
+            }
+
+            if (File.Exists(patchFileName))
+            {
+                File.Delete(patchFileName);
+            }
+
+            Process.Start(selfName);
+            System.Environment.Exit(0);
         }
     }
 }

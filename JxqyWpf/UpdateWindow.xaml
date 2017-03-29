@@ -9,6 +9,6 @@
     <Grid HorizontalAlignment="Left" Height="203" Margin="10,10,0,0" VerticalAlignment="Top" Width="473">
         <ProgressBar x:Name="pbUpdate" Height="27" Margin="29,92,148,0" VerticalAlignment="Top" Width="296" BorderBrush="#FF2B3224" Background="#FFDCECB5" Foreground="#FF1DB006" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label Content="Updating" HorizontalAlignment="Center" VerticalAlignment="Top" Height="26" Width="77" HorizontalContentAlignment="Center"/>
-        <Label x:Name="lbValue" Content="5%" HorizontalAlignment="Left" Margin="346,92,0,0" VerticalAlignment="Top" Width="62"/>
+        <Label x:Name="lbValue" Content="0%" HorizontalAlignment="Left" Margin="346,92,0,0" VerticalAlignment="Top" Width="62"/>
     </Grid>
 </Window>

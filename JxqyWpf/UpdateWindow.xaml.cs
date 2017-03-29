@@ -27,7 +27,7 @@ namespace JxqyWpf
         public void ChangePrograss(float value)
         {
             pbUpdate.Value = value;
-            lbValue.Content = value;
+            lbValue.Content = value.ToString() + "%";
         }
 
     }
