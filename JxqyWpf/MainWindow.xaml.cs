@@ -72,7 +72,8 @@ namespace JxqyWpf
 
         private void btnCheckUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            Update upd = new Update();
+            upd.CheckUpdate();
         }
     }
 }
