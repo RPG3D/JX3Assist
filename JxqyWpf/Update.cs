@@ -20,6 +20,7 @@ namespace JxqyWpf
         protected string tmpFileName = "tmp";
         protected string serverConfigFileUrl;
         protected string patchFileName = "Patch.tmp";
+        static protected bool isChecking = false;
 
         protected UpdateWindow updWin = new UpdateWindow();
 
@@ -31,6 +32,12 @@ namespace JxqyWpf
 
         public void CheckUpdate()
         {
+            if(isChecking == true)
+            {
+                return;
+            }
+            isChecking = true;
+
             ConfigFile updateCfg = new ConfigFile(workPath + "/" + updateConfigName);
             localVersion = updateCfg.ReadValue("AppInfo", "AppVersion");
             WebClient dlClient = new WebClient();
@@ -47,6 +54,12 @@ namespace JxqyWpf
             serverVersion = serverCfg.ReadValue("AppInfo", "AppVersion");
             if (localVersion == serverVersion)
             {
+                if(File.Exists(tmpFileName))
+                {
+                    File.Delete(tmpFileName);
+                }
+
+                isChecking = false;
                 MessageBox.Show("Your App is the latest version");
                 return;
             }
@@ -70,7 +83,7 @@ namespace JxqyWpf
         {
             updWin.Close();
             UpdateSelf(patchFileName);
-            MessageBox.Show("Your App is the latest version");
+            
         }
 
         public bool UpdateSelf(string newFileName)
@@ -88,6 +101,9 @@ namespace JxqyWpf
             {
                 //File.Delete(selfName + "_old");
             }
+
+            MessageBox.Show("Your App is the latest version");
+
             return true;
         }
     }
