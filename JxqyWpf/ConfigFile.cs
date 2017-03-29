@@ -41,13 +41,13 @@ namespace JxqyWpf
             if(File.Exists(fileName))
             {
                 StringBuilder ret = new StringBuilder(255);
-                long i = GetPrivateProfileString(section, key, "Default", ret, 255, fileName);
+                long i = GetPrivateProfileString(section, key, string.Empty, ret, 255, fileName);
                 return ret.ToString();
             }
             else
             {
                 ///Wrong.
-                return "NotExist";
+                return string.Empty;
             }   
         }
 

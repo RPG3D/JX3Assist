@@ -31,11 +31,6 @@ namespace JxqyWpf
 
         public void CheckUpdate()
         {
-            if(File.Exists(tmpFileName))
-            {
-                return;
-            }
-
             ConfigFile updateCfg = new ConfigFile(workPath + "/" + updateConfigName);
             localVersion = updateCfg.ReadValue("AppInfo", "AppVersion");
             WebClient dlClient = new WebClient();
@@ -49,6 +44,7 @@ namespace JxqyWpf
         public void OnCheckUpdateEnd(object sender, AsyncCompletedEventArgs e)
         {
             ConfigFile serverCfg = new ConfigFile(workPath + "/" + tmpFileName);
+            serverVersion = serverCfg.ReadValue("AppInfo", "AppVersion");
             if (localVersion == serverVersion)
             {
                 MessageBox.Show("Your App is the latest version");
@@ -80,9 +76,18 @@ namespace JxqyWpf
         public bool UpdateSelf(string newFileName)
         {
             string selfName = Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+
+            if (File.Exists(selfName + "_old"))
+            {
+                File.Delete(selfName + "_old");
+            }
+            
             File.Move(selfName, selfName + "_old");
             File.Move(patchFileName, selfName);
-            File.Delete(selfName + "_old");
+            if (File.Exists(selfName + "_old"))
+            {
+                //File.Delete(selfName + "_old");
+            }
             return true;
         }
     }

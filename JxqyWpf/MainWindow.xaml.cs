@@ -25,6 +25,7 @@ namespace JxqyWpf
     public partial class MainWindow : Window
     {
         public MyApp app = new MyApp();
+        public Update upd = new Update();
 
         public MainWindow()
         {
@@ -72,7 +73,6 @@ namespace JxqyWpf
 
         private void btnCheckUpdate_Click(object sender, RoutedEventArgs e)
         {
-            Update upd = new Update();
             upd.CheckUpdate();
         }
     }
