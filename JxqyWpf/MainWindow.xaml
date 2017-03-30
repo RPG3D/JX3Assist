@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JxqyWpf"
         mc:Ignorable="d"
-        Title="Sword Online 3 Assist WPF" Height="394" Width="534" ResizeMode="NoResize">
+        Title="Sword Online 3 Assist WPF" Height="394" Width="534" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="Resources/AppIcon.ico">
     <Grid Margin="10,21,311,143">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -15,7 +15,7 @@
         <Button x:Name="btnSetTick" Content="SetTick" HorizontalAlignment="Left" Margin="0,131,0,0" VerticalAlignment="Top" Width="90" Click="btnSetTick_Click" Height="40" FontSize="16"/>
         <TextBox x:Name="txtInTime" HorizontalAlignment="Left" Height="40" Margin="107,131,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="90" FontSize="16"/>
         <Label Content="Sword Online 3 Assist&#xD;&#xA;&#xD;&#xA;Shuangyuehuanye @ 2017&#xD;&#xA;" Margin="318,223,-291,-117" Height="95" VerticalAlignment="Top"/>
-        <Button x:Name="btnCheckUpdate" Content="Check  Update" HorizontalAlignment="Left" Height="41" Margin="0,237,0,-77" VerticalAlignment="Top" Width="119" Click="btnCheckUpdate_Click"/>
+        <Button x:Name="btnCheckUpdate" Content="Check  Update" HorizontalAlignment="Left" Height="51" Margin="0,223,0,-73" VerticalAlignment="Top" Width="121" Click="btnCheckUpdate_Click"/>
 
     </Grid>
 </Window>
