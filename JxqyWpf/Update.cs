@@ -117,12 +117,7 @@ namespace JxqyWpf
 
             ConfigFile updateCfg = new ConfigFile(workPath + "/" + updateConfigName);
             updateCfg.WriteValue("AppInfo", "AppVersion", serverVersion);
-            MessageBox.Show("Updating sucessful.The App is restarting.");
-
-            if (File.Exists(tmpFileName))
-            {
-                File.Delete(tmpFileName);
-            }
+            MessageBox.Show("Updating sucessful.App is restarting.");
 
             if (File.Exists(patchFileName))
             {
