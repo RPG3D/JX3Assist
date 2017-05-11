@@ -51,7 +51,15 @@ namespace JxqyWpf
             WebClient dlClient = new WebClient();
 
             dlClient.DownloadFileCompleted += new AsyncCompletedEventHandler(OnCheckUpdateEnd);
-            dlClient.DownloadFileAsync(new Uri(serverConfigFileUrl), tmpFileName);
+
+            try
+            {
+                dlClient.DownloadFileAsync(new Uri(serverConfigFileUrl), tmpFileName);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             return;
         }
@@ -81,7 +89,15 @@ namespace JxqyWpf
             {
                 File.Delete(patchFileName);
             }
-            dlClient.DownloadFileAsync(new Uri(patchUrl), patchFileName);
+
+            try
+            {
+                dlClient.DownloadFileAsync(new Uri(patchUrl), patchFileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             if (File.Exists(tmpFileName))
             {
