@@ -1,0 +1,85 @@
+
+/cast [nobuff:秀气] 婆罗门
+/cast [nobuff:剑舞] 名动四方
+/cast 剑破虚空
+/cast 剑气长江
+/cast 玳弦急曲
+
+
+问水诀
+/cast [tnobuff:梅隐香|tbufftime:梅隐香<48] 梅隐香
+/cast [rage>88&buff:怜光>4] 啸日
+/cast [tbuff:梅隐香] 梦泉虎跑
+/cast 断潮
+/cast 听雷
+
+山居剑意
+/cast [bufftime:怜光>21&rage<50] 雪断桥 
+/cast [rage<20] 啸日
+/cast [buff:凤鸣] 云飞玉皇
+/cast [nobuff:凤鸣] 断潮
+/cast 听雷
+/cast 夕照雷峰
+
+
+
+
+太虚剑意
+/cast [qidian>7] 无我无剑
+/cast [nobuff:碎星辰] 碎星辰
+/cast [bufftime:玄门<6&buff:碎星辰] 人剑合一
+/cast 八荒归元
+/cast 天地无极
+/cast 三环套月
+
+
+
+///气劲 sun
+///狂意 rage
+///刀魂 nenrgy
+
+///秀明尘身
+/cast [sun>109] 雪絮金屏
+/cast [rage<15&sun<109] 松烟竹雾
+/cast 西楚悲歌
+/cast 破釜沉舟
+/cast 上将军印
+/cast 项王击鼎
+
+
+///松烟竹雾
+/cast [sun>109] 雪絮金屏
+/cast [rage>109] 秀明尘身
+/cast 擒龙六斩
+/cast 擒龙式
+/cast 腾蛟式
+/cast 起凤式
+/cast 控鹤式
+/cast 逐鹰式
+/cast 惊燕式
+/cast 龙骧虎步
+
+
+/cast [sun>105] 雪絮金屏
+/cast [sun<15&rage>105] 秀明尘身
+/cast 擒龙六斩
+/cast 擒龙式
+/cast 腾蛟式
+/cast 起凤式
+/cast 控鹤式
+/cast 逐鹰式
+/cast 惊燕式
+
+
+/cast [sun>105] 雪絮金屏
+/cast [sun<10&rage>105] 秀明尘身
+/cast 龙骧虎步
+
+
+
+///雪絮金屏
+/cast [sun<10&energy>109] 松烟竹雾
+/cast [sun<10&rage>109] 秀明尘身
+/cast 坚壁清野
+/cast [buff:含风>2] 醉斩白蛇
+/cast 刀啸风吟
