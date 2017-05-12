@@ -1,5 +1,5 @@
 
-/cast [nobuff:秀气] 婆罗门
+/cast [nobuff:袖气] 婆罗门
 /cast [nobuff:剑舞] 名动四方
 /cast 剑破虚空
 /cast 剑气长江
