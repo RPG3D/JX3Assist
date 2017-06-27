@@ -45,7 +45,7 @@ namespace JxqyWpf
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    Show();
+                    Show(obj, e);
                 }
                     
             });
