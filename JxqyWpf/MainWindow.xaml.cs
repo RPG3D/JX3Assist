@@ -16,6 +16,9 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Media;
 using System.Threading;
+using System.Windows.Forms;
+using System.Drawing;
+
 
 namespace JxqyWpf
 {
@@ -27,12 +30,51 @@ namespace JxqyWpf
         public MyApp app = new MyApp();
         public Update upd = new Update();
 
+        NotifyIcon appNotifyIcon = new NotifyIcon();
+
         public MainWindow()
         {
             InitializeComponent();
             this.Title = app.windowTitle;
+            appNotifyIcon.BalloonTipText = "JX3 Assist";
+            appNotifyIcon.ShowBalloonTip(2000);
+            appNotifyIcon.Text = "JX3 Assist";
+            appNotifyIcon.Visible = true;
+            appNotifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
+            appNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler((obj, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    Show();
+                }
+                    
+            });
+
+            StateChanged += MainWindow_StateChanged;
+            
         }
 
+        private void MainWindow_StateChanged(object obj, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+            {
+                Hide(obj, e);
+            }
+        }
+
+        private void Show(object obj, EventArgs e)
+        {
+            Visibility = Visibility.Visible;
+            ShowInTaskbar = true;
+            Activate();
+        }
+
+        private void Hide(object obj, EventArgs e)
+        {
+            ShowInTaskbar = false;
+            Visibility = Visibility.Hidden;
+        }
+       
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             app.Start();
@@ -50,17 +92,17 @@ namespace JxqyWpf
             {
                 if(time < 20 || time > 9999)
                 {
-                    MessageBox.Show("TickTime Should Between 20 and 9999");
+                    System.Windows.MessageBox.Show("TickTime Should Between 20 and 9999");
                 }
                 else
                 {
                     app.SetTickTime(time);
-                    MessageBox.Show("Successful");
+                    System.Windows.MessageBox.Show("Successful");
                 } 
             }
             else
             {
-                MessageBox.Show("TickTime Should Between 20 and 9999");
+                System.Windows.MessageBox.Show("TickTime Should Between 20 and 9999");
             }
             txtInTime.Text = time.ToString();
         }
