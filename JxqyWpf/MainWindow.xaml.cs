@@ -18,7 +18,7 @@ using System.Media;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
-
+using System.ComponentModel;
 
 namespace JxqyWpf
 {
@@ -50,7 +50,7 @@ namespace JxqyWpf
                     
             });
 
-            StateChanged += MainWindow_StateChanged;
+            StateChanged += MainWindow_StateChanged; 
             
         }
 
@@ -60,6 +60,11 @@ namespace JxqyWpf
             {
                 Hide(obj, e);
             }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
         }
 
         private void Show(object obj, EventArgs e)
