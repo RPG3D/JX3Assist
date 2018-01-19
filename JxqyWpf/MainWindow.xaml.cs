@@ -65,6 +65,10 @@ namespace JxqyWpf
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
+            if(appNotifyIcon != null)
+            {
+                appNotifyIcon.Dispose();
+            }
         }
 
         private void Show(object obj, EventArgs e)
